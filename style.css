@@ -1,0 +1,342 @@
+body {
+    font-family: 'Merriweather';
+    text-align: center;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px; /* Larger width for widescreen support */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 30px;
+}
+
+.line {
+    position: relative;
+    margin: 50px 0; /* Top and bottom margin for the line */
+    height: 10px;
+    background: #ccc;
+    margin-bottom: 70px; /* Increase bottom margin for spacing */
+}
+
+#stick-figure {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: stick-move 0.2s ease-in-out;
+}
+
+.head {
+    width: 20px;
+    height: 20px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+}
+
+.body {
+    width: 5px;
+    height: 30px; /* Reduced height for a shorter neck */
+    background-color: #4CAF50;
+}
+
+.arms {
+    position: relative;
+    width: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-arm, .right-arm {
+    width: 5px;
+    height: 30px;
+    background-color: #4CAF50;
+    transform-origin: top;
+    animation: arm-swing 0.4s alternate infinite;
+}
+
+.legs {
+    position: relative;
+    width: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-leg, .right-leg {
+    width: 5px;
+    height: 40px;
+    background-color: #4CAF50;
+    transform-origin: top;
+    animation: leg-swing 0.4s alternate infinite;
+}
+
+.controls {
+    margin-top: 40px; /* Adjust this value for the desired spacing */
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.controls button {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.controls button:hover {
+    background-color: #45a049;
+}
+
+.controls button.disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#reset {
+    background-color: #f44336; /* Red background for reset */
+}
+
+#reset:hover {
+    background-color: #e53935;
+}
+
+.stats {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+/* Project Insights Section */
+.project-insights {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Left-align text for better readability */
+    font-size: 16px;
+}
+
+.project-insights h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.project-insights h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.project-insights p, .project-insights ul, .project-insights ol {
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+.project-insights ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.project-insights ol {
+    padding-left: 20px;
+    list-style-type: decimal;
+}
+
+blockquote {
+    background: #f4f4f4;
+    padding: 10px 15px;
+    border-left: 4px solid #ccc;
+    margin: 10px 0;
+    font-style: italic;
+    color: #666;
+}
+
+/* Figures and Images */
+figure {
+    margin: 20px 0;
+    text-align: center;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+figcaption {
+    font-size: 14px;
+    margin-top: 10px;
+    color: #555;
+}
+
+/* Image Row Styling for Insights */
+.image-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.image-row figure {
+    flex: 1 1 calc(45% - 10px); /* Two images per row with spacing */
+    max-width: 45%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Interactive Graph Section */
+#graph {
+    margin-top: 40px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#results {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#result, #discretized-result {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+#result h2, #discretized-result h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+#result p, #discretized-result p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+#graph {
+    margin-top: 40px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Styling for Static Visualizations Section */
+#static-visuals {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Styling for Interactive Graphs Section */
+#interactive-graphs {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+canvas {
+    animation: fadeIn 0.3s ease-in-out;
+    max-width: 100%;
+    height: auto;
+}
+
+@keyframes arm-swing {
+    from {
+        transform: rotate(30deg);
+    }
+    to {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes leg-swing {
+    from {
+        transform: rotate(-30deg);
+    }
+    to {
+        transform: rotate(30deg);
+    }
+}
+
+@keyframes stick-move {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
