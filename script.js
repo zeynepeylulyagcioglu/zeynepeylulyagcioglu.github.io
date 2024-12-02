@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxSteps = 100;
     let isSimulating = false;
     const runLengths = [];
+    let isAnalyzed = false; // Ensure analysis happens only once
+
 
     // Embedded PMF Data from your JSON file
     const discretizedPMF = {
@@ -70,11 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const resetButton = document.getElementById('reset');
-    resetButton.addEventListener('click', () => {
-        // Refresh the page to reset everything
-        location.reload();
+    resetButton.addEventListener("click", () => {
+        isAnalyzed = false; // Reset analysis state
+        location.reload(); // Reload the page to start fresh
     });
-
+    
     document.addEventListener('keydown', (event) => {
         if (isSimulating || steps >= maxSteps) return; // Prevent key presses if simulation is active
     
@@ -86,25 +88,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     function startRandomWalk() {
-        if (isSimulating) return;
-
+        if (isSimulating || isAnalyzed) return; // Prevent starting a new simulation if one is active or already analyzed
+    
         isSimulating = true;
         const interval = setInterval(() => {
             if (steps >= maxSteps) {
-                clearInterval(interval);
-                isSimulating = false;
-                analyzeWalkData(runLengths.map(([_, length]) => length));
+                clearInterval(interval); // Stop the interval
+                isSimulating = false; // Reset simulation state
+                analyzeWalkData(runLengths.map(([_, length]) => length)); // Trigger analysis
                 return;
             }
-
+    
             const direction = Math.random() < 0.5 ? -1 : 1;
             moveCharacter(direction);
         }, 200);
-    }
+    }    
 
     randomWalkButton.addEventListener('click', startRandomWalk);
 
     function analyzeWalkData(runLengths) {
+        if (isAnalyzed) return; // Prevent multiple calls
+        isAnalyzed = true; // Mark as analyzed to prevent future calls
+    
         let logProbHuman = 0;
         let logProbComputer = 0;
         let discretizedLogProbHuman = 0;
@@ -127,44 +132,37 @@ document.addEventListener('DOMContentLoaded', () => {
         const logLikelihoodRatio = logProbHuman - logProbComputer;
         const discretizedLogLikelihoodRatio = discretizedLogProbHuman - discretizedLogProbComputer;
     
-        // Tie-breaker logic: Default to "HUMAN" if the ratios are both 0
         const decision =
             logLikelihoodRatio > 0
-                ? "HUMAN"
+                ? "HUMAN 👋"
                 : logLikelihoodRatio < 0
-                ? "COMPUTER"
-                : "HUMAN"; // Default to HUMAN for ties
+                ? "COMPUTER 🤖"
+                : "HUMAN 👋";
     
         const discretizedDecision =
             discretizedLogLikelihoodRatio > 0
-                ? "HUMAN"
+                ? "HUMAN 👋"
                 : discretizedLogLikelihoodRatio < 0
-                ? "COMPUTER"
-                : "HUMAN"; // Default to HUMAN for ties
+                ? "COMPUTER 🤖"
+                : "HUMAN 👋";
     
-        // Ensure the title and content for "Continuous Probability Analysis" are intact
-        const resultContainer = document.getElementById("result");
-        resultContainer.innerHTML = `
-            <h2>Continuous Probability Analysis</h2>
+        resultDisplay.innerHTML = `
+            <h2>Continuous Probability Analysis 🔎</h2>
             <p>Log Joint Probability (Human): ${logProbHuman.toFixed(6)}</p>
             <p>Log Joint Probability (Computer): ${logProbComputer.toFixed(6)}</p>
             <p>Log-Likelihood Ratio: ${logLikelihoodRatio.toFixed(6)}</p>
-            <p><strong>Decision: ${decision}</strong></p>
+            <p><strong>Decision: These 👣 👣 👣 more likely belong to a ${decision}</strong></p>
         `;
     
-        // Update Discretized PMF Analysis
         document.getElementById("discretized-log-prob-human").textContent = discretizedLogProbHuman.toFixed(6);
         document.getElementById("discretized-log-prob-computer").textContent = discretizedLogProbComputer.toFixed(6);
         document.getElementById("discretized-log-likelihood-ratio").textContent = discretizedLogLikelihoodRatio.toFixed(6);
-        document.getElementById("discretized-decision").textContent = `The walk is more likely ${discretizedDecision}`;
+        document.getElementById("discretized-decision").textContent = `These 👣 👣 👣 more likely belong to a ${discretizedDecision}`;
     
-        // Plot the visualizations
         plotRunLengths(runLengths);
-        //plotDiscretizedPMF();
-
-        // Display the static text and images
         displayProjectInsights();
-    }    
+    }
+    
 
     function geomPDF(x, p) {
         return p * Math.pow(1 - p, x - 1);
@@ -408,8 +406,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="insights-card">
                     <h3>Additional Resources</h3>
                     <ul>
-                        <li><a href="https://github.com/your-repo" target="_blank">GitHub Repository</a>: Explore the source code behind this project.</li>
-                        <li><a href="your-paper-link.pdf" target="_blank">Research Paper (PDF)</a>: Read the full analysis and methodology in detail.</li>
+                        <li><a href="https://github.com/zeynepeylulyagcioglu/randomWalk" target="_blank">GitHub Repository</a>: Explore the source code behind this project.</li>
+                        <li><a href="https://github.com/zeynepeylulyagcioglu/randomWalk/tree/main/paper" target="_blank">Research Paper (PDF)</a>: Read the full analysis and methodology in detail.</li>
                     </ul>
                 </div>
             </div>
