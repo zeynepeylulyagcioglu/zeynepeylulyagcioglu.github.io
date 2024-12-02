@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv='cache-control' content='no-cache'> 
+  <meta http-equiv='expires' content='0'> 
+  <meta http-equiv='pragma' content='no-cache'>
+  <title>Random Walk Challenge</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ Random Walk Challenge ✨</h1>
+      <p>
+        Hello World! 🌎 Simulate a random walk below and discover whether your randomness is 👋 human or 🤖 computer-generated!
+      </p>
+      <p>
+        Press the arrow keys to move the stick figure ⬅️ or ➡️, or press the buttons to simulate a random walk 🟢 or reset 🔴.
+      </p>
+    </header>
+
+    <!-- Stick Figure and Line -->
+    <section>
+      <div class="line">
+        <div id="stick-figure">
+          <div class="head"></div>
+          <div class="body"></div>
+          <div class="arms">
+            <div class="left-arm"></div>
+            <div class="right-arm"></div>
+          </div>
+          <div class="legs">
+            <div class="left-leg"></div>
+            <div class="right-leg"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <section class="controls">
+      <button id="random-walk" aria-label="Start a random walk simulation">Start Random Walk</button>
+      <button id="reset" aria-label="Reset the walk and stats">Reset</button>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <h2>📉 Walk Statistics 📈 </h2>
+      <p>👣 Steps Taken: <span id="steps-taken" aria-live="polite">0</span></p>
+      <p>📍 Current Position: <span id="position" aria-live="polite">0</span></p>
+    </section>
+
+    <!-- Graph Section -->
+    <section id="graph">
+      <h2>🗺️ Run Length Distribution 🧭</h2>
+      <canvas id="chart" width="400" height="200"></canvas>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="results">
+      <!-- Continuous Analysis -->
+      <article id="result">
+        <h2>🔍 Continuous Probability Analysis 🔎</h2>
+        <p>Log Joint Probability (Human): <span id="log-prob-human">N/A</span></p>
+        <p>Log Joint Probability (Computer): <span id="log-prob-computer">N/A</span></p>
+        <p>Log-Likelihood Ratio: <span id="log-likelihood-ratio">N/A</span></p>
+        <p><strong>Decision: <span id="decision">N/A</span></strong></p>
+      </article>
+
+      <!-- Discretized Analysis -->
+      <article id="discretized-result">
+        <h2>🔍 Discretized PMF Analysis 🔎</h2>
+        <p>Log Joint Probability (Human): <span id="discretized-log-prob-human">N/A</span></p>
+        <p>Log Joint Probability (Computer): <span id="discretized-log-prob-computer">N/A</span></p>
+        <p>Log-Likelihood Ratio: <span id="discretized-log-likelihood-ratio">N/A</span></p>
+        <p><strong>Decision: <span id="discretized-decision">N/A</span></strong></p>
+      </article>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
